@@ -4,42 +4,48 @@ A powerful Python reverse-engineering tool that reconstructs `.py` source code f
 
 ---
 
-### 🚀 Features
-
-* **🔁 Convert .pyc → .py:** High-fidelity reconstruction.
-* **🧠 Intelligent Source Reconstruction:** Goes beyond literal translation to rebuild high-level logic.
-* **🔎 Cross-Version Disassembler:** Built-in engine to interpret opcodes across different Python versions.
-* **🔧 Auto-Fixing:** Automatic syntax error correction and multi-pass post-processing.
-* **🧩 Advanced Reconstruction:**
-    * Decorators & Wrappers
-    * Closures & `nonlocal` variables
-    * Merged and optimized Imports
-    * Complex `try/except/finally` blocks
-    * Variadic arguments (`*args`, `**kwargs`)
-* **⚙️ Version Management:** * Automatic Python version detection from `.pyc` headers.
-    * Auto-relaunch with the correct Python interpreter if installed in PATH.
-
----
-
 ### 📂 Usage
 
 python main.py <input.pyc> <output.py>
 
 
+## 🎯 DIRECTORY STRUCTURE:
 
-⚙️ OptionsOptionDescription--verbose / -vEnables verbose mode and saves a full disassembly dump.--forceBypasses Python version checks and forces translation.
+config/
+   └── __init__.py                 (Main configuration)
 
-🧠 How It WorksBytecode Parsing: 
-	The tool reads marshal objects from .pyc files and reconstructs compatible code objects.Disassembly: A custom engine interprets opcodes and generates readable pseudo-source code.Reconstruction: The translator rebuilds scopes, variable names, logic flow, and control blocks.Post-Processing: Multiple passes fix indentation, deep nesting, and broken expressions.Note: Unreconstructible lines are marked with # TODO (decompile):
+dictionaries/
+   ├── __init__.py                 (Dictionary compiler)
+   ├── ctypes_primitives.py        (Primitive types)
+   ├── ctypes_pointers.py          (Pointer types)
+   ├── ctypes_structures.py        (Structures & unions)
+   ├── ctypes_windows.py           (Windows types)
+   ├── ctypes_loaders.py           (DLL loaders)
+   └── ctypes_utilities.py         (Utility functions)
 
-🧪 CompatibilitySupports .pyc files compiled with: Python 3.10 / 3.11 Python 3.12 / 3.13 / 3.14 (Latest Opcodes)
+parsers/
+   ├── __init__.py                 (File orchestrator)
+   ├── pyc_parser.py               (PyC file parser)
+   └── source_parser.py            (Source file parser)
 
-🛑 LimitationsComments (#) are stripped during compilation and cannot be recovered.
-	Heavy obfuscation or bytecode manipulation may reduce reconstruction accuracy.
-	Complex dynamic code may require minor manual cleanup.
+generators/
+   ├── __init__.py
+   ├── code_builder.py             (Code builder)
+   ├── syntax_validator.py         (Syntax validator)
+   └── bytecode_decompiler.py      (Bytecode decompiler)
 
-💡 Example OutputPlaintext[OK] Source reconstructed → output.py
+enrichers/
+   ├── __init__.py
+   ├── ctypes_enricher.py          (Ctypes enricher)
+   └── import_inferencer.py        (Import inferencer)
 
-📜 LicenseFree to use for reverse engineering, analysis, research, and learning purposes.
+analyzers/
+   ├── __init__.py
+   ├── quality_checker.py          (Quality checker)
+   └── compatibility_checker.py    (Compatibility checker)
 
-🤝 ContributingContributions are welcome! Feel free to submit PRs to:Improve reconstruction accuracy.Support upcoming Python versions.Optimize post-processing logic.
+utilities/
+   └── __init__.py                 (Utility functions)
+
+main.py                            (Main entry point)
+README.md                          (Documentation)
